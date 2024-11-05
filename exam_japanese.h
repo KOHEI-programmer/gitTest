@@ -7,6 +7,9 @@ QuestionList CreateKanjiExam();
 //	慣用句の意味を答える問題を作成する
 QuestionList CreateIdiomExam();
 
-//	同音異義語(同じ読みで意味のことなる語)の問題を作成する
+//	同音・同訓異義語(同じ読みで意味のことなる語)の問題を作成する
 QuestionList CreateHomophoneExam();
+
+//	対義語の問題を作成する
+QuestionList CreateAntonymExam();
 

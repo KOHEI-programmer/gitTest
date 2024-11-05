@@ -138,7 +138,7 @@ QuestionList CreateIdiomExam()
 	return	questions;
 }
 /*
-*	//	同音異義語(同じ読みで意味のことなる語)の問題を作成する
+*	//	同音・同訓異義語(同じ読みで意味のことなる語)の問題を作成する
 */
 QuestionList CreateHomophoneExam()
 {
@@ -233,5 +233,51 @@ QuestionList CreateHomophoneExam()
 		questions.push_back({ s,to_string(correctNo) });
 	}
 
+	return	questions;
+}
+
+/*
+*	対義語の問題を作成する
+*/
+QuestionList CreateAntonymExam()
+{
+	const struct
+	{
+		const char* kanji[2];
+	}data[] =
+	{
+		{"意図(いと)","恣意(しい)"},{"需要(じゅよう)","供給(きょうきゅう)"},
+		{"故意(こい)","過失(かしつ)"},{"曖昧(あいまい)","明瞭(めいりょう)"},
+		{"緊張(きんちょう)","弛緩(しかん)"},{"過疎(かそ)","過密(かみつ)"},
+		{"栄転(えいてん)","左遷(させん)"},{"消費(しょうひ)","生産(せいさん)"},
+		{"異端(いたん)","正統(せいとう)"},{"尊敬(そんけい)","軽蔑(けいべつ)"},
+	};
+
+	constexpr int quizCount = 5;
+	QuestionList questions;
+	questions.reserve(quizCount);
+	const vector<int> indices = CreateRandomIndices(size(data));
+	random_device rd;
+
+	for (int i = 0; i < quizCount; i++)
+	{
+		//	間違った番号をランダムに選ぶ
+		const int correctindex = indices[i];
+		vector<int> answers = CreateWrongIndices(size(data), correctindex);
+
+		//	ランダムな位置を正しい番号で上書き
+		const int correctNo = uniform_int_distribution<>(1, 4)(rd);
+		answers[correctNo - 1] = correctindex;
+
+		//	問題文を作成
+		const int object = uniform_int_distribution<>(0, 1)(rd);
+		const int other = (object + 1) % 2;
+		string s = "「" + string(data[correctindex].kanji[object]) + "」の対義語として正しい番号を選べ";
+		for (int j = 0; j < 4; j++)
+		{
+			s += "\n" + to_string(j + 1) + "：" + data[answers[j]].kanji[other];
+		}
+		questions.push_back({ s,to_string(correctNo) });
+	}
 	return	questions;
 }
