@@ -3,7 +3,7 @@
 using namespace std;
 
 /*
-	ランダムな番号配列を作成する
+*	ランダムな番号配列を作成する
 */
 vector<int> CreateRandomIndices(int n)
 {
@@ -20,7 +20,7 @@ vector<int> CreateRandomIndices(int n)
 	return	indices;
 }
 /*	
-	番号の配列をシャッフル
+*	番号の配列をシャッフル
 */
 void Shuffle(vector<int>& indices)
 {
@@ -37,7 +37,7 @@ void Shuffle(vector<int>& indices)
 }
 
 /*
-	ランダムな番号配列を作成する
+*	ランダムな番号配列を作成する
 */
 vector<int> CreateWrongIndices(int n, int correctIndex)
 {
