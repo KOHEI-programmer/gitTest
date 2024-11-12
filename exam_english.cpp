@@ -1,0 +1,57 @@
+#include"exam_english.h"
+#include"utility.h"
+using namespace std;
+
+/*
+*	//	英単語の問題を作成する
+*/
+QuestionList CreateEnglishWordExam()
+{
+	const struct
+	{
+		const char* word;		//	英単語
+		const char* reading;	//	読み
+		const char* meaning;	//	意味
+    }data[] =
+    {
+        {"state","ステート","状態"},
+        {"business", "ビジネス", "事業、業務" },
+        {"abstract", "アブストラクト", "抽象的な" },
+        {"concrete", "コンクリート", "具体的な" },
+        {"digital", "デジタル", "数字で情報を伝える" },
+        {"analogue", "アナログ", "類似している、類似物" },
+        {"exchange", "エクスチェンジ", "交換、両替、為替" },
+        {"infrastructure", "インフラストラクチャ", "下部構造、基盤となる施設や設備" },
+        {"knowledge", "ナレッジ", "知識" },
+        {"credit", "クレジット", "信用" },
+        {"routine", "ルーティン", "決まった手順、日課" },
+        {"management", "マネジメント", "管理、経営" },
+        {"account", "アカウント", "会計、口座" },
+        {"unique", "ユニーク", "他に類を見ない、個性的な" },
+        {"variety", "バラエティー", "変化に富む、多様な" },
+        {"schedule", "スケジュール", "予定、計画" },
+        {"agenda", "アジェンダ", "課題、議題" },
+        {"technology", "テクノロジー", "科学技術" },
+        {"collaboration", "コラボレーション", "協力、共同事業、共同作業" },
+        {"tax", "タックス", "税金" },
+        {"stock", "ストック", "在庫、株券" },
+        {"product", "プロダクト", "製品" },
+        {"booking", "ブッキング", "予約、帳簿への記入" },
+        {"weight", "ウェイト", "重さ" },
+        {"compliance","コンプライアンス","法令.社会的模範を守る"},
+        {"receipt","レシート","領収書"},
+    };
+
+    constexpr int quizCount = 5;
+    QuestionList questions;
+    questions.reserve(quizCount);
+    const vector<int> indices = CreateRandomIndices(size(data));
+
+    for (int i = 0; i < quizCount; i++)
+    {
+        const auto& e = data[indices[i]];
+        questions.push_back({ "「" + string(e.meaning) + "」を意味する英単語を答えよ",e.word });
+    }
+
+    return  questions;
+}
